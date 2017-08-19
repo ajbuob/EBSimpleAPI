@@ -3,8 +3,11 @@ package com.abuob.eb.web;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+/**
+ * Web response object to return information about a single topic
+ */
 @JacksonXmlRootElement(localName = "url-publish")
-public class TopicResponse {
+public class UrlPublishResponse {
 
     @JacksonXmlProperty(localName = "topicid")
     private Long topicId;
@@ -15,7 +18,7 @@ public class TopicResponse {
     @JacksonXmlProperty(localName = "urlclass")
     private String urlClass;
 
-    public TopicResponse(Long topicId, String urlTitle, String urlClass) {
+    public UrlPublishResponse(Long topicId, String urlTitle, String urlClass) {
         this.topicId = topicId;
         this.urlTitle = urlTitle;
         this.urlClass = urlClass;
