@@ -1,5 +1,8 @@
 package com.abuob.eb.service;
 
+/**
+ * Data transfer object used by TopicQueryService
+ */
 public class TopicDTO {
 
     private Long topicId;
