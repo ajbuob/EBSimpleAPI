@@ -1,11 +1,11 @@
-package com.abuob.eb.web;
+package com.abuob.eb.web.error;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class TopicErrorResponse {
-
-    @JacksonXmlProperty(localName = "topic-id")
-    private Long topicId;
+/**
+ * Abstract web error response to be extended by all errors
+ */
+public abstract class UrlPublishErrorResponse {
 
     @JacksonXmlProperty(localName = "error")
     private String error;
@@ -13,14 +13,9 @@ public class TopicErrorResponse {
     @JacksonXmlProperty(localName = "cause")
     private String cause;
 
-    public TopicErrorResponse(Long topicId, String error, String cause) {
-        this.topicId = topicId;
+    public UrlPublishErrorResponse(String error, String cause) {
         this.error = error;
         this.cause = cause;
-    }
-
-    public Long getTopicId() {
-        return topicId;
     }
 
     public String getError() {
