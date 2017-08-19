@@ -1,7 +1,7 @@
 package com.abuob.eb.exception;
 
 import com.abuob.eb.web.error.UrlPublishClassErrorResponse;
-import com.abuob.eb.web.error.UrlPublishTopicErrorResponse;
+import com.abuob.eb.web.error.UrlPublishTopicIdErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,9 +18,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    UrlPublishTopicErrorResponse handleException(UnknownTopicIdException uie) {
-        Long id = uie.getId();
-        return new UrlPublishTopicErrorResponse(id, MISSING_URL, "topic " + id + " not in the database");
+    UrlPublishTopicIdErrorResponse handleException(UnknownTopicIdException utie) {
+        Long id = utie.getId();
+        return new UrlPublishTopicIdErrorResponse(id, MISSING_URL, "topic " + id + " not in the database");
     }
 
     @ExceptionHandler
