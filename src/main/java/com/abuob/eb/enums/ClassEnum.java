@@ -1,5 +1,8 @@
 package com.abuob.eb.enums;
 
+/**
+ * Enum which contains all available classes in the application
+ */
 public enum ClassEnum {
 
     ANIMAL("animal"),
