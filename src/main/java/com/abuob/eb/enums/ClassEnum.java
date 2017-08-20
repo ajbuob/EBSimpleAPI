@@ -16,7 +16,7 @@ public enum ClassEnum {
     TECHNOLOGY("TECHNOLOGY"),
     TOPIC("topic");
 
-    private String value;
+    private final String value;
 
     ClassEnum(String value) {
         this.value = value;

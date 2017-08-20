@@ -10,10 +10,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class UrlPublishClassErrorResponse extends UrlPublishErrorResponse {
 
     @JacksonXmlProperty(localName = "urlclass")
-    private String className;
+    private final String className;
 
-    public UrlPublishClassErrorResponse(String className , String error, String cause) {
-        super(error,cause);
+    public UrlPublishClassErrorResponse(String className, String error, String cause) {
+        super(error, cause);
         this.className = className;
     }
 

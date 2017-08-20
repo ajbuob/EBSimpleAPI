@@ -8,10 +8,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public abstract class UrlPublishErrorResponse {
 
     @JacksonXmlProperty(localName = "error")
-    private String error;
+    private final String error;
 
     @JacksonXmlProperty(localName = "cause")
-    private String cause;
+    private final String cause;
 
     public UrlPublishErrorResponse(String error, String cause) {
         this.error = error;

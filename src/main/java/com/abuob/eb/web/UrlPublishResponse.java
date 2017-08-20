@@ -10,13 +10,13 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class UrlPublishResponse {
 
     @JacksonXmlProperty(localName = "topicid")
-    private Long topicId;
+    private final Long topicId;
 
     @JacksonXmlProperty(localName = "urltitle")
-    private String urlTitle;
+    private final String urlTitle;
 
     @JacksonXmlProperty(localName = "urlclass")
-    private String urlClass;
+    private final String urlClass;
 
     public UrlPublishResponse(Long topicId, String urlTitle, String urlClass) {
         this.topicId = topicId;

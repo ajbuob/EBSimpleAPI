@@ -5,11 +5,11 @@ package com.abuob.eb.service;
  */
 public class TopicDTO {
 
-    private Long topicId;
+    private final Long topicId;
 
-    private String urlTitle;
+    private final String urlTitle;
 
-    private String urlClass;
+    private final String urlClass;
 
     public TopicDTO(Long topicId, String urlTitle, String urlClass) {
         this.topicId = topicId;

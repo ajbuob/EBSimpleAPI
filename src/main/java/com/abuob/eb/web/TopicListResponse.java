@@ -12,7 +12,7 @@ public class TopicListResponse {
 
     @JacksonXmlProperty(localName = "topicid")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<Long> topicIdList;
+    private final List<Long> topicIdList;
 
     public TopicListResponse() {
         this.topicIdList= new ArrayList<>();

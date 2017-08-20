@@ -10,10 +10,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class UrlPublishTopicIdErrorResponse extends UrlPublishErrorResponse {
 
     @JacksonXmlProperty(localName = "topicid")
-    private Long topicId;
+    private final Long topicId;
 
     public UrlPublishTopicIdErrorResponse(Long topicId, String error, String cause) {
-        super(error,cause);
+        super(error, cause);
         this.topicId = topicId;
     }
 

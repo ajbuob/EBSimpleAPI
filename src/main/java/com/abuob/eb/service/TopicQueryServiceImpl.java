@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class TopicQueryServiceImpl implements TopicQueryService {
 
-    private TopicRepository topicRepository;
+    private final TopicRepository topicRepository;
 
     @Autowired
     public TopicQueryServiceImpl(TopicRepository topicRepository) {

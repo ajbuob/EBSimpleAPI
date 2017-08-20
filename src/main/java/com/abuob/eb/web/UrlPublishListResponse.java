@@ -12,7 +12,7 @@ public class UrlPublishListResponse {
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "url-publish")
-    private List<UrlPublishResponse> urlPublishResponseList;
+    private final List<UrlPublishResponse> urlPublishResponseList;
 
     public UrlPublishListResponse() {
         urlPublishResponseList = new ArrayList<>();
