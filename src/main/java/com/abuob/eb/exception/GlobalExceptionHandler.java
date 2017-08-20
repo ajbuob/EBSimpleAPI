@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    private static final String MISSING_URL = "URL_NOT_FOUND";
+    private static final String MISSING_URL = "URL NOT FOUND";
 
     @ExceptionHandler
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
