@@ -42,7 +42,7 @@ public class InMemoryTopicRepository implements TopicRepository {
     }
 
     @PostConstruct
-    public void init() throws Exception {
+    public void init() throws FileNotFoundException, XMLStreamException {
         if (xmlFilePath == null) {
             logger.error("XML File Path missing");
             throw new IllegalArgumentException("Failed to initialize XML File Path");
