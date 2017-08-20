@@ -18,8 +18,8 @@ public class UrlPublishListResponse {
         urlPublishResponseList = new ArrayList<>();
     }
 
-    public boolean addPublishResponse(UrlPublishResponse urlPublishResponse) {
-        return urlPublishResponseList.add(urlPublishResponse);
+    public void addPublishResponse(UrlPublishResponse urlPublishResponse) {
+        urlPublishResponseList.add(urlPublishResponse);
     }
 
     public List<UrlPublishResponse> getUrlPublishResponseList() {
