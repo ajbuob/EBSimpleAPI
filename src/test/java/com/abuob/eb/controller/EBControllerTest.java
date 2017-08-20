@@ -26,14 +26,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class EBControllerTest {
 
-    private static final String XPATH_URL_PUBLISH_TOPIC_ID = "/url-publish/topicid";
-    private static final String XPATH_URL_PUBLISH_TITLE = "/url-publish/urltitle";
-    private static final String XPATH_URL_PUBLISH_CLASS = "/url-publish/urlclass";
+    private static final String XPATH_URL_PUBLISH = "/url-publish";
+    private static final String XPATH_TOPIC_ID = "/topicid";
+    private static final String XPATH_TITLE = "/urltitle";
+    private static final String XPATH_CLASS = "/urlclass";
 
-    private static final String XPATH_URL_PUBLISH_ERROR = "/url-publish/error";
-    private static final String XPATH_URL_PUBLISH_CAUSE = "/url-publish/cause";
+    private static final String XPATH_URL_PUBLISH_TOPIC_ID = XPATH_URL_PUBLISH + XPATH_TOPIC_ID;
+    private static final String XPATH_URL_PUBLISH_TITLE = XPATH_URL_PUBLISH + XPATH_TITLE;
+    private static final String XPATH_URL_PUBLISH_CLASS = XPATH_URL_PUBLISH + XPATH_CLASS;
 
-    private static final String XPATH_URL_TOPIC_LIST_TOPIC_ID = "topic-list/topicid";
+    private static final String XPATH_URL_PUBLISH_ERROR = XPATH_URL_PUBLISH + "/error";
+    private static final String XPATH_URL_PUBLISH_CAUSE = XPATH_URL_PUBLISH + "/cause";
+
+    private static final String XPATH_URL_TOPIC_LIST_TOPIC_ID = "/topic-list/topicid";
+    private static final String XPATH_URL_PUBLISH_LIST_URL_PUBLISH = "/publish-list/url-publish";
+
 
     private static final String MISSING_URL = "URL NOT FOUND";
 
@@ -54,7 +61,8 @@ public class EBControllerTest {
                 .andExpect(xpath(XPATH_URL_PUBLISH_TOPIC_ID).number((double) expectedTopicId))
                 .andExpect(xpath(XPATH_URL_PUBLISH_ERROR).string(MISSING_URL))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CAUSE).string("topic " + expectedTopicId + " not in the database"));
-        verify(topicQueryServiceMock).findTopicInfoById(expectedTopicId);
+
+        verify(topicQueryServiceMock, times(1)).findTopicInfoById(expectedTopicId);
     }
 
     @Test
@@ -72,7 +80,8 @@ public class EBControllerTest {
                 .andExpect(xpath(XPATH_URL_PUBLISH_TOPIC_ID).number((double) expectedTopicId))
                 .andExpect(xpath(XPATH_URL_PUBLISH_TITLE).string(expectedTitle))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CLASS).string(expectedClass));
-        verify(topicQueryServiceMock).findTopicInfoById(expectedTopicId);
+
+        verify(topicQueryServiceMock, times(1)).findTopicInfoById(expectedTopicId);
     }
 
     @Test
@@ -85,6 +94,7 @@ public class EBControllerTest {
                 .andExpect(xpath(XPATH_URL_PUBLISH_CLASS).string(expectedClassName))
                 .andExpect(xpath(XPATH_URL_PUBLISH_ERROR).string(MISSING_URL))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CAUSE).string("class: " + expectedClassName + " is not valid"));
+
         verify(topicQueryServiceMock, times(0)).findTopicIdsByClass(expectedClassName);
     }
 
@@ -104,10 +114,10 @@ public class EBControllerTest {
         mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.TEXT_XML_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID).nodeCount(4))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[1]").number((double)id1))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[2]").number((double)id2))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[3]").number((double)id3))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[4]").number((double)id4));
+                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[1]").number((double) id1))
+                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[2]").number((double) id2))
+                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[3]").number((double) id3))
+                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[4]").number((double) id4));
 
         verify(topicQueryServiceMock, times(1)).findTopicIdsByClass(expectedClassName);
     }
@@ -115,5 +125,50 @@ public class EBControllerTest {
     @Test
     public void findAllTopicInfo_Success() throws Exception {
 
+        final long id1 = 32453L;
+        final long id2 = 44L;
+        final long id3 = 5425L;
+
+        final String title1 = "title2";
+        final String title2 = "title3";
+        final String title3 = "title1";
+
+        final String className1 = "className3";
+        final String className2 = "className2";
+        final String className3 = "className1";
+
+        TopicDTO topicDTO1 = new TopicDTO(id1, title1, className1);
+        TopicDTO topicDTO2 = new TopicDTO(id2, title2, className2);
+        TopicDTO topicDTO3 = new TopicDTO(id3, title3, className3);
+
+        List<TopicDTO> topicDTOList = Lists.newArrayList(topicDTO1, topicDTO2, topicDTO3);
+        when(topicQueryServiceMock.findAllTopicInfo()).thenReturn(topicDTOList);
+
+        mockMvc.perform(get("/eb/all/topic").accept(MediaType.TEXT_XML_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH).nodeCount(3))
+
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TOPIC_ID).number((double) id1))
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TITLE).string(title1))
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_CLASS).string(className1))
+
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_TOPIC_ID).number((double) id2))
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_TITLE).string(title2))
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_CLASS).string(className2))
+
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_TOPIC_ID).number((double) id3))
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_TITLE).string(title3))
+                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_CLASS).string(className3));
+
+        verify(topicQueryServiceMock, times(1)).findAllTopicInfo();
+    }
+
+    @Test
+    public void unknownPath_Expect404Status() throws Exception {
+
+        String unknownPth = "/some/unknown/path";
+
+        mockMvc.perform(get("/eb" + unknownPth).accept(MediaType.TEXT_XML_VALUE))
+                .andExpect(status().isNotFound());
     }
 }
