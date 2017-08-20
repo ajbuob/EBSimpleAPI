@@ -22,8 +22,8 @@ public class TopicListResponse {
         this.topicIdList = topicIdList;
     }
 
-    public boolean addTopicId(long topicId) {
-        return topicIdList.add(topicId);
+    public void addTopicId(long topicId) {
+        topicIdList.add(topicId);
     }
 
     public List<Long> getTopicIdList() {
