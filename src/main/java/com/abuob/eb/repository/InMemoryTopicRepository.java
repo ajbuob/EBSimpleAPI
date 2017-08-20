@@ -4,6 +4,7 @@ import com.abuob.eb.service.TopicDTO;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
  **/
 @Repository
 @Profile("dev")
+@ConfigurationProperties(prefix = "eb")
 public class InMemoryTopicRepository implements TopicRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(InMemoryTopicRepository.class);
@@ -35,8 +37,7 @@ public class InMemoryTopicRepository implements TopicRepository {
 
     private final List<TopicDTO> topicDTOList;
 
-    private String xmlFilePath = "/Users/alexanderbuob/IdeaProjects/EBSimpleAPI/src/main/xml/britannica_topics.xml";
-
+    private String xmlFilePath;
     public InMemoryTopicRepository() {
         topicDTOList = Lists.newArrayList();
     }
