@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +30,8 @@ public class EBController {
         this.topicQueryService = topicQueryService;
     }
 
-    @RequestMapping(value = "topic/{topic_id}", method = RequestMethod.GET, produces = MediaType.TEXT_XML_VALUE)
+
+    @GetMapping(value = "topic/{topic_id}" , produces = MediaType.TEXT_XML_VALUE)
     public ResponseEntity<UrlPublishResponse> findTopicInfoFromId(@PathVariable("topic_id") long topicId) {
 
         TopicDTO topicDTO = topicQueryService.findTopicInfoById(topicId);
@@ -46,7 +44,7 @@ public class EBController {
         return new ResponseEntity<>(urlPublishResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "class/{class_name}", method = RequestMethod.GET, produces = MediaType.TEXT_XML_VALUE)
+    @GetMapping(value = "class/{class_name}", produces = MediaType.TEXT_XML_VALUE)
     public ResponseEntity<TopicListResponse> findTopicInfoFromClass(@PathVariable("class_name") String className) {
 
         //Check if the submitted class name is valid
@@ -61,7 +59,7 @@ public class EBController {
         return new ResponseEntity<>(topicListResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "all/topic", method = RequestMethod.GET, produces = MediaType.TEXT_XML_VALUE)
+    @GetMapping(value = "all/topic", produces = MediaType.TEXT_XML_VALUE)
     public ResponseEntity<UrlPublishListResponse> findAllTopicInfo() {
 
         UrlPublishListResponse urlPublishListResponse = new UrlPublishListResponse();
