@@ -69,7 +69,7 @@ public class EBControllerTest {
     public void findTopicInfoFromId_Success() throws Exception {
 
         long expectedTopicId = 563452;
-        String expectedTitle = "Watergate";
+        String expectedTitle = "First Moon Landing";
         String expectedClass = "event";
         TopicDTO topicDTO = new TopicDTO(expectedTopicId, expectedTitle, expectedClass);
 
