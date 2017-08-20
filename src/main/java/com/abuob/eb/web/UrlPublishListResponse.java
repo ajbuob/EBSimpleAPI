@@ -1,6 +1,7 @@
 package com.abuob.eb.web;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 public class UrlPublishListResponse {
 
     @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "url-publish")
     private List<UrlPublishResponse> urlPublishResponseList;
 
     public UrlPublishListResponse() {
