@@ -5,11 +5,14 @@ package com.abuob.eb.service;
  */
 public class TopicDTO {
 
-    private final Long topicId;
+    private Long topicId;
 
-    private final String urlTitle;
+    private String urlTitle;
 
-    private final String urlClass;
+    private String urlClass;
+
+    public TopicDTO() {
+    }
 
     public TopicDTO(Long topicId, String urlTitle, String urlClass) {
         this.topicId = topicId;
@@ -21,11 +24,23 @@ public class TopicDTO {
         return topicId;
     }
 
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
+    }
+
     public String getUrlTitle() {
         return urlTitle;
     }
 
+    public void setUrlTitle(String urlTitle) {
+        this.urlTitle = urlTitle;
+    }
+
     public String getUrlClass() {
         return urlClass;
+    }
+
+    public void setUrlClass(String urlClass) {
+        this.urlClass = urlClass;
     }
 }
