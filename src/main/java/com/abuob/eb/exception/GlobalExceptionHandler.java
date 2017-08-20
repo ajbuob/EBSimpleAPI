@@ -30,4 +30,15 @@ public class GlobalExceptionHandler {
         String className = ucne.getClassName();
         return new UrlPublishClassErrorResponse(className, MISSING_URL, "class: " + className + " is not valid");
     }
+
+    @ExceptionHandler
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    String handleException(Exception e) {
+        String message = "INTERNAL SERVER ERROR";
+        if (e.getMessage() != null) {
+            message = message + ":" + e.getMessage();
+        }
+        return message;
+    }
 }
