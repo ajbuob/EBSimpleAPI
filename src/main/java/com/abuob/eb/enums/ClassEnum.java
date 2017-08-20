@@ -28,10 +28,10 @@ public enum ClassEnum {
 
     public static ClassEnum findByValue(String value) {
         for (ClassEnum classEnum : values()) {
-            if (classEnum.getValue()== value) {
+            if (classEnum.getValue().equals(value)) {
                 return classEnum;
             }
         }
-        throw new IllegalArgumentException("Unable to find class:" + value);
+        return null;
     }
 }
