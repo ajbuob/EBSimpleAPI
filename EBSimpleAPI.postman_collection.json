@@ -1,0 +1,44 @@
+{
+	"variables": [],
+	"info": {
+		"name": "EBSimpleAPI",
+		"_postman_id": "a3a4d3d2-cf32-efab-650e-cce7ed8a737c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find By Topic ID",
+			"request": {
+				"url": "localhost:8080/eb/topic/453",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find By Class Name",
+			"request": {
+				"url": "localhost:8080/eb/class/testClass",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Find All",
+			"request": {
+				"url": "localhost:8080/eb/all/topic",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
