@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/eb")
 public class EBController {
 
-    private TopicQueryService topicQueryService;
+    private final TopicQueryService topicQueryService;
 
     @Autowired
     public EBController(TopicQueryService topicQueryService) {
