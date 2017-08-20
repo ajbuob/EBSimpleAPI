@@ -5,7 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 /**
  * Abstract web error response to be extended by all errors
  */
-public abstract class UrlPublishErrorResponse {
+abstract class UrlPublishErrorResponse {
 
     @JacksonXmlProperty(localName = "error")
     private final String error;
@@ -13,7 +13,7 @@ public abstract class UrlPublishErrorResponse {
     @JacksonXmlProperty(localName = "cause")
     private final String cause;
 
-    public UrlPublishErrorResponse(String error, String cause) {
+    UrlPublishErrorResponse(String error, String cause) {
         this.error = error;
         this.cause = cause;
     }
