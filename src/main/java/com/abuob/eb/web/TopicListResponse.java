@@ -18,6 +18,10 @@ public class TopicListResponse {
         this.topicIdList= new ArrayList<>();
     }
 
+    public TopicListResponse(List<Long> topicIdList) {
+        this.topicIdList = topicIdList;
+    }
+
     public boolean addTopicId(long topicId) {
         return topicIdList.add(topicId);
     }
