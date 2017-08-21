@@ -35,5 +35,4 @@ public class UrlPublishResponse {
     public String getUrlClass() {
         return urlClass;
     }
-
 }
