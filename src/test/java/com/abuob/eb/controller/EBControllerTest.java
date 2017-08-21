@@ -26,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EBControllerTest {
 
     private static final String XPATH_URL_PUBLISH = "/url-publish";
+    private static final String XPATH_TOPIC_LIST = "/topic-list";
+    private static final String XPATH_PUBLISH_LIST = "/publish-list";
     private static final String XPATH_TOPIC_ID = "/topicid";
     private static final String XPATH_TITLE = "/urltitle";
     private static final String XPATH_CLASS = "/urlclass";
@@ -37,9 +39,8 @@ public class EBControllerTest {
     private static final String XPATH_URL_PUBLISH_ERROR = XPATH_URL_PUBLISH + "/error";
     private static final String XPATH_URL_PUBLISH_CAUSE = XPATH_URL_PUBLISH + "/cause";
 
-    private static final String XPATH_URL_TOPIC_LIST_TOPIC_ID = "/topic-list/topicid";
-    private static final String XPATH_URL_PUBLISH_LIST_URL_PUBLISH = "/publish-list/url-publish";
-
+    private static final String XPATH_TOPIC_LIST_TOPIC_ID = XPATH_TOPIC_LIST + XPATH_TOPIC_ID;
+    private static final String XPATH_PUBLISH_LIST_URL_PUBLISH = XPATH_PUBLISH_LIST + XPATH_URL_PUBLISH;
 
     private static final String MISSING_URL = "URL NOT FOUND";
 
@@ -116,11 +117,11 @@ public class EBControllerTest {
         mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID).nodeCount(4))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[1]").number((double) id1))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[2]").number((double) id2))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[3]").number((double) id3))
-                .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[4]").number((double) id4));
+                .andExpect(xpath(XPATH_TOPIC_LIST_TOPIC_ID).nodeCount(4))
+                .andExpect(xpath(XPATH_TOPIC_LIST_TOPIC_ID + "[1]").number((double) id1))
+                .andExpect(xpath(XPATH_TOPIC_LIST_TOPIC_ID + "[2]").number((double) id2))
+                .andExpect(xpath(XPATH_TOPIC_LIST_TOPIC_ID + "[3]").number((double) id3))
+                .andExpect(xpath(XPATH_TOPIC_LIST_TOPIC_ID + "[4]").number((double) id4));
 
         verify(topicQueryServiceMock, times(1)).findTopicIdsByClass(expectedClassName);
     }
@@ -150,19 +151,19 @@ public class EBControllerTest {
         mockMvc.perform(get("/eb/all/topic").accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH).nodeCount(3))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH).nodeCount(3))
 
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TOPIC_ID).number((double) id1))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TITLE).string(title1))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_CLASS).string(className1))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TOPIC_ID).number((double) id1))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TITLE).string(title1))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_CLASS).string(className1))
 
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_TOPIC_ID).number((double) id2))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_TITLE).string(title2))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_CLASS).string(className2))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_TOPIC_ID).number((double) id2))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_TITLE).string(title2))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[2]" + XPATH_CLASS).string(className2))
 
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_TOPIC_ID).number((double) id3))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_TITLE).string(title3))
-                .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_CLASS).string(className3));
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_TOPIC_ID).number((double) id3))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_TITLE).string(title3))
+                .andExpect(xpath(XPATH_PUBLISH_LIST_URL_PUBLISH + "[3]" + XPATH_CLASS).string(className3));
 
         verify(topicQueryServiceMock, times(1)).findAllTopicInfo();
     }
