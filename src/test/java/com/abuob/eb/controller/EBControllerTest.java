@@ -14,12 +14,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.awt.*;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -56,7 +58,7 @@ public class EBControllerTest {
         long expectedTopicId = 345257;
         when(topicQueryServiceMock.findTopicInfoById(expectedTopicId)).thenReturn(null);
 
-        mockMvc.perform(get("/eb/topic/" + expectedTopicId).accept(MediaType.TEXT_XML_VALUE))
+        mockMvc.perform(get("/eb/topic/" + expectedTopicId).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(xpath(XPATH_URL_PUBLISH_TOPIC_ID).number((double) expectedTopicId))
                 .andExpect(xpath(XPATH_URL_PUBLISH_ERROR).string(MISSING_URL))
@@ -75,7 +77,7 @@ public class EBControllerTest {
 
         when(topicQueryServiceMock.findTopicInfoById(expectedTopicId)).thenReturn(topicDTO);
 
-        mockMvc.perform(get("/eb/topic/" + expectedTopicId).accept(MediaType.TEXT_XML_VALUE))
+        mockMvc.perform(get("/eb/topic/" + expectedTopicId).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(xpath(XPATH_URL_PUBLISH_TOPIC_ID).number((double) expectedTopicId))
                 .andExpect(xpath(XPATH_URL_PUBLISH_TITLE).string(expectedTitle))
@@ -89,7 +91,7 @@ public class EBControllerTest {
 
         String expectedClassName = "unknownClassName";
 
-        mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.TEXT_XML_VALUE))
+        mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(xpath(XPATH_URL_PUBLISH_CLASS).string(expectedClassName))
                 .andExpect(xpath(XPATH_URL_PUBLISH_ERROR).string(MISSING_URL))
@@ -111,7 +113,7 @@ public class EBControllerTest {
         List<Long> expectedTopicIdList = Lists.newArrayList(id1, id2, id3, id4);
         when(topicQueryServiceMock.findTopicIdsByClass(expectedClassName)).thenReturn(expectedTopicIdList);
 
-        mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.TEXT_XML_VALUE))
+        mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID).nodeCount(4))
                 .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[1]").number((double) id1))
@@ -144,7 +146,7 @@ public class EBControllerTest {
         List<TopicDTO> topicDTOList = Lists.newArrayList(topicDTO1, topicDTO2, topicDTO3);
         when(topicQueryServiceMock.findAllTopicInfo()).thenReturn(topicDTOList);
 
-        mockMvc.perform(get("/eb/all/topic").accept(MediaType.TEXT_XML_VALUE))
+        mockMvc.perform(get("/eb/all/topic").accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH).nodeCount(3))
 
@@ -168,7 +170,7 @@ public class EBControllerTest {
 
         String unknownPth = "/some/unknown/path";
 
-        mockMvc.perform(get("/eb" + unknownPth).accept(MediaType.TEXT_XML_VALUE))
+        mockMvc.perform(get("/eb" + unknownPth).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isNotFound());
     }
 }

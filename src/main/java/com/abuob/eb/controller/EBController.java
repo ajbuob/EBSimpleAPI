@@ -35,7 +35,7 @@ public class EBController {
     }
 
 
-    @GetMapping(value = "topic/{topic_id}", produces = MediaType.TEXT_XML_VALUE)
+    @GetMapping(value = "topic/{topic_id}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<UrlPublishResponse> findTopicInfoFromId(@PathVariable("topic_id") long topicId) {
 
         logger.debug("Trying to find topic info for id: {}", topicId);
@@ -51,7 +51,7 @@ public class EBController {
         return new ResponseEntity<>(urlPublishResponse, HttpStatus.OK);
     }
 
-    @GetMapping(value = "class/{class_name}", produces = MediaType.TEXT_XML_VALUE)
+    @GetMapping(value = "class/{class_name}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<TopicListResponse> findTopicInfoFromClass(@PathVariable("class_name") String className) {
 
         logger.debug("Trying to find topic info for class: {}", className);
@@ -70,7 +70,7 @@ public class EBController {
         return new ResponseEntity<>(topicListResponse, HttpStatus.OK);
     }
 
-    @GetMapping(value = "all/topic", produces = MediaType.TEXT_XML_VALUE)
+    @GetMapping(value = "all/topic", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<UrlPublishListResponse> findAllTopicInfo() {
 
         UrlPublishListResponse urlPublishListResponse = new UrlPublishListResponse();
