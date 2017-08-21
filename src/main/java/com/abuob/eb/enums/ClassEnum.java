@@ -13,7 +13,7 @@ public enum ClassEnum {
     PLANT("plant"),
     SCIENCE("science"),
     SPORTS("sports"),
-    TECHNOLOGY("TECHNOLOGY"),
+    TECHNOLOGY("technology"),
     TOPIC("topic");
 
     private final String value;
