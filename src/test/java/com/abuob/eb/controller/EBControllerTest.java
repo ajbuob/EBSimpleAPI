@@ -60,6 +60,7 @@ public class EBControllerTest {
 
         mockMvc.perform(get("/eb/topic/" + expectedTopicId).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isBadRequest())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(xpath(XPATH_URL_PUBLISH_TOPIC_ID).number((double) expectedTopicId))
                 .andExpect(xpath(XPATH_URL_PUBLISH_ERROR).string(MISSING_URL))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CAUSE).string("topic " + expectedTopicId + " not in the database"));
@@ -79,6 +80,7 @@ public class EBControllerTest {
 
         mockMvc.perform(get("/eb/topic/" + expectedTopicId).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(xpath(XPATH_URL_PUBLISH_TOPIC_ID).number((double) expectedTopicId))
                 .andExpect(xpath(XPATH_URL_PUBLISH_TITLE).string(expectedTitle))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CLASS).string(expectedClass));
@@ -93,6 +95,7 @@ public class EBControllerTest {
 
         mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isBadRequest())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CLASS).string(expectedClassName))
                 .andExpect(xpath(XPATH_URL_PUBLISH_ERROR).string(MISSING_URL))
                 .andExpect(xpath(XPATH_URL_PUBLISH_CAUSE).string("class: " + expectedClassName + " is not valid"));
@@ -115,6 +118,7 @@ public class EBControllerTest {
 
         mockMvc.perform(get("/eb/class/" + expectedClassName).accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID).nodeCount(4))
                 .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[1]").number((double) id1))
                 .andExpect(xpath(XPATH_URL_TOPIC_LIST_TOPIC_ID + "[2]").number((double) id2))
@@ -148,6 +152,7 @@ public class EBControllerTest {
 
         mockMvc.perform(get("/eb/all/topic").accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH).nodeCount(3))
 
                 .andExpect(xpath(XPATH_URL_PUBLISH_LIST_URL_PUBLISH + "[1]" + XPATH_TOPIC_ID).number((double) id1))
