@@ -171,9 +171,7 @@ public class EBControllerTest {
     @Test
     public void unknownPath_Expect404Status() throws Exception {
 
-        String unknownPth = "/some/unknown/path";
-
-        mockMvc.perform(get("/eb" + unknownPth).accept(MediaType.APPLICATION_XML_VALUE))
+        mockMvc.perform(get("/eb/some/unknown/path").accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isNotFound());
     }
 }
