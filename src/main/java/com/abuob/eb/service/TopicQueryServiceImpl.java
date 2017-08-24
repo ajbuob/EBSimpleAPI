@@ -30,4 +30,9 @@ public class TopicQueryServiceImpl implements TopicQueryService {
     public List<Long> findTopicIdsByClass(String className) {
         return topicRepository.findTopicIdsByClass(className);
     }
+
+    @Override
+    public List<TopicDTO> findTopicByClassName(String className) {
+        return topicRepository.findTopicByClassName(className);
+    }
 }

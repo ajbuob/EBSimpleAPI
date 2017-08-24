@@ -52,9 +52,9 @@ public class EBController {
     }
 
     @GetMapping(value = "class/{class_name}", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<TopicListResponse> findTopicInfoFromClass(@PathVariable("class_name") String className) {
+    public ResponseEntity<TopicListResponse> findTopicIdsFromClass(@PathVariable("class_name") String className) {
 
-        logger.debug("Trying to find topic info for class: {}", className);
+        logger.debug("Trying to find topic ids for class: {}", className);
 
         //Check if the submitted class name is valid
         if (ClassEnum.findByValue(className.trim().toLowerCase()) == null) {
@@ -66,9 +66,30 @@ public class EBController {
 
         TopicListResponse topicListResponse = new TopicListResponse(topicIdList);
 
-        logger.debug("Found topic info for class: {}", className);
+        logger.debug("Found topic ids for class: {}", className);
         return new ResponseEntity<>(topicListResponse, HttpStatus.OK);
     }
+
+
+    @GetMapping(value = "classAll/{class_name}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<UrlPublishListResponse> findTopicInfoFromClass(@PathVariable("class_name") String className) {
+
+        logger.debug("Trying to find topic info for class: {}", className);
+
+        //Check if the submitted class name is valid
+        if (ClassEnum.findByValue(className.trim().toLowerCase()) == null) {
+            logger.error("class: {} not valid in this application. Unable to continue");
+            throw new UnknownClassNameException(className + " not allowed in this application", className);
+        }
+
+        List<TopicDTO> topicDTOList = topicQueryService.findTopicByClassName(className);
+
+        UrlPublishListResponse urlPublishListResponse = new UrlPublishListResponse(topicDTOList);
+
+        logger.debug("Found topic info for class: {}", className);
+        return new ResponseEntity<>(urlPublishListResponse, HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "all/topic", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<UrlPublishListResponse> findAllTopicInfo() {

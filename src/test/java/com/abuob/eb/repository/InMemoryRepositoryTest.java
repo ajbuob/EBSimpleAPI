@@ -52,7 +52,7 @@ public class InMemoryRepositoryTest {
     }
 
     @Test
-    public void findTopicInfoByClass_Success() {
+    public void findTopicIdsByClass_Success() {
 
         final String className = ClassEnum.EVENT.getValue();
 
@@ -65,7 +65,7 @@ public class InMemoryRepositoryTest {
     }
 
     @Test
-    public void findTopicInfoByClass_ClassNotExist() {
+    public void findTopicIdsByClass_ClassNotExist() {
 
         final String className = "unknownClass";
 
@@ -73,5 +73,35 @@ public class InMemoryRepositoryTest {
 
         assertThat(topicIdList).isNotNull();
         assertThat(topicIdList).isEmpty();
+    }
+
+
+    @Test
+    public void findTopicInfoByClass_Success() {
+
+        final String className = ClassEnum.EVENT.getValue();
+
+        List<TopicDTO> topicDTOList = topicRepository.findTopicByClassName(className);
+
+        assertThat(topicDTOList).isNotNull();
+        assertThat(topicDTOList).isNotEmpty();
+        assertThat(topicDTOList).hasSize(3);
+
+        TopicDTO topicDTO1 = new TopicDTO(2565L, "Acacian-Schism", className);
+        TopicDTO topicDTO2 = new TopicDTO(1427L, "Treaty-of-Abo", className);
+        TopicDTO topicDTO3 = new TopicDTO(1393L, "Ableman-v-Booth", className);
+
+        assertThat(topicDTOList).containsExactlyInAnyOrder(topicDTO1, topicDTO2, topicDTO3);
+    }
+
+    @Test
+    public void findTopicInfoByClass_ClassNotExist() {
+
+        final String className = "unknownClass";
+
+        List<TopicDTO> topicDTOList = topicRepository.findTopicByClassName(className);
+
+        assertThat(topicDTOList).isNotNull();
+        assertThat(topicDTOList).isEmpty();
     }
 }

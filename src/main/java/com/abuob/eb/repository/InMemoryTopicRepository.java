@@ -38,6 +38,7 @@ public class InMemoryTopicRepository implements TopicRepository {
     private final List<TopicDTO> topicDTOList;
 
     private String xmlFilePath;
+
     public InMemoryTopicRepository() {
         topicDTOList = Lists.newArrayList();
     }
@@ -70,6 +71,13 @@ public class InMemoryTopicRepository implements TopicRepository {
         return topicDTOList.stream()
                 .filter(topic -> Objects.equals(topic.getUrlClass(), className))
                 .map(TopicDTO::getTopicId)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TopicDTO> findTopicByClassName(String className) {
+        return topicDTOList.stream()
+                .filter(topic -> Objects.equals(topic.getUrlClass(), className))
                 .collect(Collectors.toList());
     }
 
