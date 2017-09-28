@@ -55,7 +55,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!--Use Lg4j2 for application logging-->
+        <!--Use Log4j2 for application logging-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
@@ -87,7 +87,6 @@
             <artifactId>woodstox-core-asl</artifactId>
             <version>${woodstox.verson}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
