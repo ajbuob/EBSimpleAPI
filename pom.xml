@@ -5,7 +5,7 @@
     <groupId>com.abuob.eb</groupId>
     <artifactId>EBSimpleAPI</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>EBSimpleAPI</name>
 
